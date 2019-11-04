@@ -76,13 +76,17 @@ class Graph:
                 for next_vertex in self.vertices[v]:
                     s.push(next_vertex)
 
-    def dft_recursive(self, starting_vertex):
+    def dft_recursive(self, starting_vertex, path=None):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         This should be done using recursion.
         """
-        pass  # TODO
+
+        for node in self.vertices[starting_vertex]:
+            if not node in path:
+                self.dft_recursive(node, path)
+
 
     def bfs(self, starting_vertex, destination_vertex):
         """
