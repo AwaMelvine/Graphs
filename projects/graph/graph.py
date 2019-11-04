@@ -76,17 +76,33 @@ class Graph:
                 for next_vertex in self.vertices[v]:
                     s.push(next_vertex)
 
-    def dft_recursive(self, starting_vertex, path=None):
+    def dft_recursive(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         This should be done using recursion.
         """
+        s = Stack()
+        s.push(starting_vertex)
+        visited_path = set()
 
-        for node in self.vertices[starting_vertex]:
-            if not node in path:
-                self.dft_recursive(node, path)
+        self.df_traverse(s, visited_path)
 
+    def df_traverse(self, s, visited_path):
+        top = s.pop()
+        if top not in visited_path:
+            print(top)
+            visited_path.add(top)
+
+            if top:
+                for items in self.vertices[top]:
+                    s.push(items)
+            else:
+                return
+        return self.df_traverse(s, visited_path)
+
+        if s.size() > 0:
+            return self.df_traverse(s, visited_path)
 
     def bfs(self, starting_vertex, destination_vertex):
         """
@@ -94,7 +110,6 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
 
     def dfs(self, starting_vertex, destination_vertex):
         """
