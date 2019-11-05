@@ -1,6 +1,7 @@
 from graph import Graph
 from util import Stack
 
+
 def createGraph(ancestors):
     pass
 
@@ -23,10 +24,15 @@ def earliest_ancestor(ancestors, starting_node):
         print(f"{vertex}-")
         if vertex in path:
             continue
-        path.append(vertex)
+        
 
         if vertex is None:
-            return path[len(path) - 2]
+            if path[len(path) - 1] == starting_node:
+                return -1
+            else:
+                return path[len(path) - 1]
+
+        path.append(vertex)
 
         for adj_vertex in gg.vertices[vertex]:
             stack.push(adj_vertex)
@@ -36,4 +42,4 @@ def earliest_ancestor(ancestors, starting_node):
 
 test_ancestors = [(1, 3), (2, 3), (3, 6), (5, 6), (5, 7),
                   (4, 5), (4, 8), (8, 9), (11, 8), (10, 1)]
-print(f"{earliest_ancestor(test_ancestors, 2)} ===")
+print(f"ans: {earliest_ancestor(test_ancestors, 8)}")
