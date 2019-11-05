@@ -101,15 +101,13 @@ class Graph:
                 return
         return self.df_traverse(s, visited_path)
 
-        if s.size() > 0:
-            return self.df_traverse(s, visited_path)
-
     def bfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing the shortest path from
         starting_vertex to destination_vertex in
         breath-first order.
         """
+        pass
 
     def dfs(self, starting_vertex, destination_vertex):
         """
@@ -117,7 +115,19 @@ class Graph:
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
+        stack, path = Stack(), []
+        stack.push(starting_vertex)
+
+        while stack:
+            vertex = stack.pop()
+            if vertex in path:
+                continue
+            path.append(vertex)
+            for adj_vertex in self.vertices[vertex]:
+                stack.push(adj_vertex)
+            if vertex == destination_vertex:
+                return path
+        return path
 
 
 if __name__ == '__main__':
