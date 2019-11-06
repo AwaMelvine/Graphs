@@ -1,5 +1,4 @@
 from graph import Graph
-from util import Stack
 from util import Stack, Queue
 
 
@@ -9,8 +8,6 @@ def createGraph(ancestors):
 
 def earliest_ancestor(ancestors, starting_node):
     ancestor_graph = {}
-    current_level = 1
-    ancestors_in_level = {}
 
     # build ancestor tree
     for relationship in ancestors:
