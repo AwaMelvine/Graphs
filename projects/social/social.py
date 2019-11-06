@@ -1,8 +1,10 @@
+import random
 
 
 class User:
     def __init__(self, name):
         self.name = name
+
 
 class SocialGraph:
     def __init__(self):
@@ -34,21 +36,45 @@ class SocialGraph:
         """
         Takes a number of users and an average number of friendships
         as arguments
-
         Creates that number of users and a randomly distributed friendships
         between those users.
-
         The number of users must be greater than the average number of friendships.
         """
         # Reset graph
         self.lastID = 0
         self.users = {}
         self.friendships = {}
-        # !!!! IMPLEMENT ME
 
         # Add users
+        # loop over a range of 0 to numUsers
+        for i in range(0, numUsers):
+            # add user to the graph
+            self.addUser(f"User {i}")
 
-        # Create friendships
+        # create friendships
+
+        # Generate all friendship combinations
+        # make a list of possible friendships
+        possibleFreindships = []
+        # avoid duplicates ensuring that the first number is smaller than the second
+
+        # loop over userID in users
+        for userID in self.users:
+            # loop over friend id in a range from user id + 1 to the lastID +1
+            for friendID in range(userID + 1, self.lastID + 1):
+                # append the tuple of (user id , friend id) to the possible friendships list
+                possibleFreindships.append((userID, friendID))
+        # shuffle the possible friendships using the random.suffle method
+        random.shuffle(possibleFreindships)
+        # create afriendships of the first x ammount of pairs in the list
+        # X determined by the formula: numusers * avgFriendships // 2
+        # we need to divide by to as each createFriendship adds 2 friendships
+        # loop over a range to numUsers * avgFriendships // 2
+        for i in range(numUsers * avgFriendships // 2):
+            # set the friendship to possible friends at i
+            friendship = possibleFreindships[i]
+            # addfriendship of friendship[0] and friendship[1]
+            self.addFriendship(friendship[0], friendship[1])
 
     def getAllSocialPaths(self, userID):
         """
