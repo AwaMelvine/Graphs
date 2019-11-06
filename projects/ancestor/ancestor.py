@@ -1,13 +1,10 @@
 from graph import Graph
 from util import Stack
+from util import Stack, Queue
 
 
 def createGraph(ancestors):
     pass
-
-
-def earliest_ancestor(ancestors, starting_node):
-    from util import Stack, Queue
 
 
 def earliest_ancestor(ancestors, starting_node):
