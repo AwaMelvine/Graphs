@@ -1,4 +1,5 @@
 import random
+from util import Stack, Queue
 
 
 class User:
@@ -79,14 +80,27 @@ class SocialGraph:
     def getAllSocialPaths(self, userID):
         """
         Takes a user's userID as an argument
-
         Returns a dictionary containing every user in that user's
         extended network with the shortest friendship path between them.
-
         The key is the friend's ID and the value is the path.
         """
         visited = {}  # Note that this is a dictionary, not a set
         # !!!! IMPLEMENT ME
+        queue = Queue()
+        queue.enqueue([userID])
+
+        while queue.size() > 0:
+            path = queue.dequeue()
+            user = path[-1]
+
+            if user not in visited:
+                visited[user] = path
+
+                for next_user in self.friendships[user]:
+                    path_copy = list(path)
+                    path_copy.append(next_user)
+                    queue.enqueue(path_copy)
+
         return visited
 
 
